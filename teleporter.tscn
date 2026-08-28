@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dk2ngisp3vorb"]
+
+[ext_resource type="Script" uid="uid://dpcj8t4i57ugn" path="res://teleporter.gd" id="1_eumkw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ggh6h"]
+size = Vector3(0.001, 3.0166626, 3.310791)
+
+[node name="Teleporter" type="Area3D" unique_id=978671327]
+script = ExtResource("1_eumkw")
+
+[node name="Teleport" type="CollisionShape3D" parent="." unique_id=1657271565]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4995, 0.20956421, -0.7125244)
+shape = SubResource("BoxShape3D_ggh6h")
+
+[node name="Marker3D" type="Marker3D" parent="." unique_id=2115380510]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 44.236015, 0, 0)

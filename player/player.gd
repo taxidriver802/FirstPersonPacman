@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 @onready var camera_3d: Camera3D = %Camera3D
+@onready var flashlight_beam = %FlashlightBeam
 
 const SPEED = 5.5
 const SPRINT_MULTI = 1.5
@@ -9,6 +10,17 @@ const STAMINA_DRAIN = 20.0
 const STAMINA_RECHARGE = 25.0
 const TIRED_RECOVERY = 50.0
 
+const MIN_FLASHLIGHT_ANGLE = 10.0
+const MAX_FLASHLIGHT_ANGLE = 50.0
+const MIN_FLASHLIGHT_RANGE = 10.0
+const MAX_FLASHLIGHT_RANGE = 25.0
+
+const MIN_ATTENUATION = 0.5
+const MAX_ATTENUATION = 5.0
+
+const ZOOM_SPEED = 30.0
+
+var points = 0
 var tired = false
 var sprint_stamina = MAX_STAMINA
 
@@ -30,6 +42,8 @@ func _physics_process(delta):
 	handle_sprint(delta, can_sprint, direction)
 	
 	move_and_slide()
+	
+	handle_flashlight_zoom(delta)
 	
 func get_player_direction():
 	var input_direction_2D = Input.get_vector(
@@ -59,3 +73,34 @@ func handle_sprint(delta, can_sprint, direction):
 		
 		sprint_stamina += STAMINA_RECHARGE * delta
 		sprint_stamina = min(sprint_stamina, MAX_STAMINA)
+
+func handle_flashlight_zoom(delta):
+	if Input.is_action_pressed("zoom_in"):
+		flashlight_beam.spot_angle -= ZOOM_SPEED * delta
+
+	elif Input.is_action_pressed("zoom_out"):
+		flashlight_beam.spot_angle += ZOOM_SPEED * delta
+
+	flashlight_beam.spot_angle = clamp(
+		flashlight_beam.spot_angle,
+		MIN_FLASHLIGHT_ANGLE,
+		MAX_FLASHLIGHT_ANGLE
+	)
+
+	var zoom_amount = inverse_lerp(
+		MIN_FLASHLIGHT_ANGLE,
+		MAX_FLASHLIGHT_ANGLE,
+		flashlight_beam.spot_angle
+	)
+
+	flashlight_beam.spot_attenuation = lerp(
+		MIN_ATTENUATION,
+		MAX_ATTENUATION,
+		zoom_amount
+	)
+
+	flashlight_beam.spot_range = lerp(
+		MAX_FLASHLIGHT_RANGE,
+		MIN_FLASHLIGHT_RANGE,
+		zoom_amount
+	)

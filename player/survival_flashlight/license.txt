@@ -1,0 +1,8 @@
+Model Information:
+* title:	Survival flashlight
+* source:	https://sketchfab.com/3d-models/survival-flashlight-f1fb4de6714140cb9a83cc34ceff5249
+* author:	Paolajid.official (https://sketchfab.com/paolajid.official)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works

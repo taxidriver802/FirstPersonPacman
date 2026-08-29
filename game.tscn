@@ -1,32 +1,52 @@
 [gd_scene format=3 uid="uid://c1q4anhr1lkxx"]
 
-[ext_resource type="PackedScene" uid="uid://cjkticw5pevov" path="res://player.tscn" id="1_80nbo"]
+[ext_resource type="PackedScene" uid="uid://cjkticw5pevov" path="res://player/player.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://bfm1jrr7ugvyr" path="res://game.gd" id="1_e2o6t"]
-[ext_resource type="PackedScene" uid="uid://001k5wlsiirc" path="res://power_pellets.tscn" id="3_feb5d"]
-[ext_resource type="PackedScene" uid="uid://c880fjoooweo6" path="res://pellets.tscn" id="4_fc0e3"]
-[ext_resource type="PackedScene" uid="uid://dk2ngisp3vorb" path="res://teleporter.tscn" id="5_7jktm"]
+[ext_resource type="PackedScene" uid="uid://001k5wlsiirc" path="res://collectables/power_pellets.tscn" id="3_feb5d"]
+[ext_resource type="PackedScene" uid="uid://c880fjoooweo6" path="res://collectables/pellets.tscn" id="4_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://dk2ngisp3vorb" path="res://teleporter/teleporter.tscn" id="5_7jktm"]
+[ext_resource type="PackedScene" uid="uid://dd6xsg47gw0iv" path="res://Ghosts/ghost.tscn" id="6_ryrav"]
 
 [sub_resource type="Environment" id="Environment_4flbx"]
 background_mode = 1
 background_color = Color(0.22232628, 0.48669815, 0.8729452, 1)
-ambient_light_source = 2
+ambient_light_source = 1
 ambient_light_color = Color(0.5752359, 0.44005242, 0.20054176, 1)
 tonemap_mode = 2
+glow_bloom = 1.0
 fog_enabled = true
-fog_light_color = Color(0.11563786, 0.33622047, 0.6548824, 1)
+fog_light_color = Color(0.019345036, 0.11308398, 0.25365472, 1)
+fog_light_energy = 0.5
+fog_density = 0.08
 fog_height = 0.1
-fog_height_density = 0.4
+fog_height_density = 1.38
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2o6t"]
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_feb5d"]
+albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ggh6h"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eow3j"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ryrav"]
+albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fc0e3"]
+albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7jktm"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hbyas"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_a5da5"]
+font_size = 20
 
 [node name="Game" type="Node3D" unique_id=756695374]
 script = ExtResource("1_e2o6t")
@@ -34,15 +54,18 @@ script = ExtResource("1_e2o6t")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1609516429]
 environment = SubResource("Environment_4flbx")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=224206661]
-transform = Transform3D(1, 0, 0, 0, 0.021913225, 0.9997599, 0, -0.9997599, 0.021913227, -12.463495, 13.290118, 8.832768)
-
 [node name="Map" type="Node3D" parent="." unique_id=814537794]
 
 [node name="Walls" type="Node3D" parent="Map" unique_id=1564129610]
 
 [node name="floor" type="CSGBox3D" parent="Map/Walls" unique_id=801560925]
 transform = Transform3D(100.45034, 0, 0, 0, 0.40595028, 0, 0, 0, 106.579155, -20.824509, -0.30161524, -11.901182)
+size = Vector3(1, 0.110687256, 1)
+material = SubResource("StandardMaterial3D_e2o6t")
+
+[node name="floor2" type="CSGBox3D" parent="Map/Walls" unique_id=49585499]
+transform = Transform3D(100.45034, 0, 0, 0, 0.40595028, 0, 0, 0, 106.579155, -20.824509, 3.0303607, -11.901182)
+visible = false
 size = Vector3(1, 0.110687256, 1)
 material = SubResource("StandardMaterial3D_e2o6t")
 
@@ -366,10 +389,12 @@ material = SubResource("StandardMaterial3D_feb5d")
 [node name="block" type="CSGBox3D" parent="Map/Walls" unique_id=92731196]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.173615, 0, 0.2807684)
 size = Vector3(5.4552, 5, 2.8286133)
+material = SubResource("StandardMaterial3D_eow3j")
 
 [node name="block2" type="CSGBox3D" parent="Map/Walls" unique_id=1086635461]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.83662, 0, 0.2807684)
 size = Vector3(6.9834595, 5, 2.8286133)
+material = SubResource("StandardMaterial3D_ryrav")
 
 [node name="block3" type="CSGBox3D" parent="Map/Walls" unique_id=279553449]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.3806534, 0, 0.28076798)
@@ -383,15 +408,73 @@ material = SubResource("StandardMaterial3D_7jktm")
 
 [node name="Teleporters" type="Node3D" parent="Map" unique_id=651953703]
 
+[node name="Teleporter" parent="Map/Teleporters" unique_id=978671327 instance=ExtResource("5_7jktm")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 8.1312475, 0, -18.57312)
+
+[node name="Teleporter2" parent="Map/Teleporters" unique_id=1161665184 instance=ExtResource("5_7jktm")]
+transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, -40.471073, 0, -18.57312)
+
 [node name="Pickups" type="Node3D" parent="Map" unique_id=170682778]
 
 [node name="PowerPellets" parent="Map/Pickups" unique_id=2019188297 instance=ExtResource("3_feb5d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.345413, 0, -34.85364)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.223907, 0, -42.412857)
+
+[node name="PowerPellets2" parent="Map/Pickups" unique_id=841406000 instance=ExtResource("3_feb5d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.920581, 0, -42.569355)
+
+[node name="PowerPellets3" parent="Map/Pickups" unique_id=1868244324 instance=ExtResource("3_feb5d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1352425, 0, 2.5331144)
+
+[node name="PowerPellets4" parent="Map/Pickups" unique_id=513586401 instance=ExtResource("3_feb5d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.492332, 0, 2.7476807)
 
 [node name="Pellets" parent="Map/Pickups" unique_id=2059066877 instance=ExtResource("4_fc0e3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.430166, 0, -33.248226)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.308395, 0, -38.48095)
+
+[node name="Pellets2" parent="Map/Pickups" unique_id=1805942066 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.308395, 0, -42.734554)
+
+[node name="Pellets3" parent="Map/Pickups" unique_id=420971924 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.308395, 0, -42.734554)
+
+[node name="Pellets4" parent="Map/Pickups" unique_id=107038215 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.308395, 0, -42.734554)
+
+[node name="Pellets5" parent="Map/Pickups" unique_id=1088756498 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.308395, 0, -42.734554)
+
+[node name="Pellets6" parent="Map/Pickups" unique_id=1248261283 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.308395, 0, -42.734554)
+
+[node name="Pellets7" parent="Map/Pickups" unique_id=611828555 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.308395, 0, -42.734554)
+
+[node name="Pellets8" parent="Map/Pickups" unique_id=229359549 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.308395, 0, -42.734554)
+
+[node name="Pellets9" parent="Map/Pickups" unique_id=1212913319 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.308395, 0, -42.734554)
+
+[node name="Pellets10" parent="Map/Pickups" unique_id=717680893 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.308395, 0, -42.734554)
+
+[node name="Pellets11" parent="Map/Pickups" unique_id=716395094 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.308395, 0, -42.734554)
+
+[node name="Pellets12" parent="Map/Pickups" unique_id=543252627 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3083954, 0, -42.734554)
+
+[node name="Pellets13" parent="Map/Pickups" unique_id=715885278 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3083954, 0, -42.734554)
+
+[node name="Pellets14" parent="Map/Pickups" unique_id=1391773127 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6916046, 0, -42.734554)
+
+[node name="Pellets15" parent="Map/Pickups" unique_id=360703709 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2225604, 0, -42.734554)
 
 [node name="Player" parent="." unique_id=1781238019 instance=ExtResource("1_80nbo")]
+unique_name_in_owner = true
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -16.193563, 0, -34.68606)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1445377253]
@@ -400,22 +483,51 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -16.
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -100.0
-offset_bottom = 100.0
+offset_left = 8.0
+offset_right = 408.0
+offset_bottom = 400.0
 grow_horizontal = 0
 
 [node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer" unique_id=843138508]
 handle_input_locally = false
-size = Vector2i(200, 200)
+size = Vector2i(400, 400)
 render_target_update_mode = 4
 
 [node name="MinimapCam" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport" unique_id=174199641]
-transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, -16.424833, 16.145634, -19.615908)
+transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, -15.940542, 2.9632444, -19.804379)
 projection = 1
-size = 52.00684
+size = 50.527
 
-[node name="Teleporter" parent="." unique_id=978671327 instance=ExtResource("5_7jktm")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 8.1312475, 0, -18.57312)
+[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=355115275]
+unique_name_in_owner = true
+offset_left = 23.0
+offset_top = 25.0
+offset_right = 164.0
+offset_bottom = 67.0
+text = "points: 10"
+label_settings = SubResource("LabelSettings_hbyas")
 
-[node name="Teleporter2" parent="." unique_id=1161665184 instance=ExtResource("5_7jktm")]
-transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, -40.471073, 0, -18.57312)
+[node name="PowerLabel" type="Label" parent="CanvasLayer" unique_id=1944461332]
+unique_name_in_owner = true
+offset_left = -6.0
+offset_top = 62.0
+offset_right = 185.0
+offset_bottom = 90.0
+text = "Power Pellet"
+label_settings = SubResource("LabelSettings_a5da5")
+horizontal_alignment = 1
+
+[node name="PowerPelletTimer" type="Timer" parent="." unique_id=681776012]
+unique_name_in_owner = true
+wait_time = 10.0
+one_shot = true
+
+[node name="Ghost" parent="." unique_id=45999213 instance=ExtResource("6_ryrav")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -19, 0, -32)
+
+[node name="Ghost2" parent="." unique_id=1465089097 instance=ExtResource("6_ryrav")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.915436, 0, -30.576344)
+
+[connection signal="timeout" from="PowerPelletTimer" to="." method="_on_power_pellet_timer_timeout"]
+
+[editable path="Player"]

@@ -1,14 +1,10 @@
 [gd_scene format=3 uid="uid://001k5wlsiirc"]
 
-[ext_resource type="Script" uid="uid://c3rvl4yrpmrmy" path="res://power_pellets.gd" id="1_fvpho"]
+[ext_resource type="Script" uid="uid://c3rvl4yrpmrmy" path="res://collectables/power_pellets.gd" id="1_fvpho"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ggh6h"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0q8le"]
-albedo_color = Color(0.3019608, 0.3019608, 0.3019608, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_ggh6h"]
-material = SubResource("StandardMaterial3D_0q8le")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hbyas"]
 
 [node name="PowerPellets" type="Node3D" unique_id=2019188297]
 script = ExtResource("1_fvpho")
@@ -20,5 +16,6 @@ transform = Transform3D(0.550534, 0, 0, 0, 0.550534, 0, 0, 0, 0.550534, 0, 1, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1863753577]
 shape = SubResource("BoxShape3D_ggh6h")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D/CollisionShape3D" unique_id=648458997]
-mesh = SubResource("BoxMesh_ggh6h")
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Area3D/CollisionShape3D" unique_id=1774344113]
+rings = 10
+material = SubResource("StandardMaterial3D_hbyas")

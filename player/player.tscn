@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://cjkticw5pevov"]
+
+[ext_resource type="Script" uid="uid://8axh8on5w1ec" path="res://player/player.gd" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://bnvu718lwwns6" path="res://player/survival_flashlight/scene.gltf" id="2_rkbax"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g8bx3"]
+radius = 0.3647461
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4flbx"]
+albedo_color = Color(0.81833446, 0.8183347, 1.540184e-06, 1)
+
+[node name="Player" type="CharacterBody3D" unique_id=1781238019 groups=["player"]]
+script = ExtResource("1_4flbx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=462588454]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_g8bx3")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CollisionShape3D" unique_id=1104480934]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02152437, 0.37756968, 0.24224567)
+size = Vector3(1.098259, 1, 1.1287079)
+material = SubResource("StandardMaterial3D_4flbx")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=823608908]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4459635, 0)
+
+[node name="Flashlight" parent="Camera3D" unique_id=947048394 instance=ExtResource("2_rkbax")]
+transform = Transform3D(-0.019055128, 0.03962398, -0.9990331, -0.15192941, 0.9874958, 0.042064223, 0.98820776, 0.15258406, -0.0127967745, 0.2568428, -0.26022005, -0.265426)
+
+[node name="FlashlightBeam" type="SpotLight3D" parent="Camera3D" unique_id=735558862]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24295086, -0.18705297, -0.3714761)
+light_energy = 13.098
+spot_range = 98.689
+spot_attenuation = 2.0
+spot_angle = 19.31

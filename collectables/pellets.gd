@@ -1,4 +1,6 @@
 extends Node3D
+
+@onready var game = get_node("/root/Game")
 @onready var area_3d: Area3D = %Area3D
 @onready var player = %Player
 
@@ -24,4 +26,5 @@ func _on_body_entered(body):
 
 func collect():
 	player.points += 1
+	game.pellet_collected()
 	queue_free()

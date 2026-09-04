@@ -35,3 +35,7 @@ light_energy = 13.098
 spot_range = 98.689
 spot_attenuation = 2.0
 spot_angle = 19.31
+
+[node name="DamageTimer" type="Timer" parent="." unique_id=288845852]
+unique_name_in_owner = true
+one_shot = true

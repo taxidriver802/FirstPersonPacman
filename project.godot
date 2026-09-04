@@ -23,6 +23,10 @@ window/size/mode=3
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
+[global_group]
+
+pellets=""
+
 [input]
 
 move_left={

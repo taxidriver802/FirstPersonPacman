@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dl13otvd8q8sy"]
+
+[ext_resource type="Material" uid="uid://dw8b72k8xv8py" path="res://Ghosts/pacman_ghost/Material.004.tres" id="1_tg8mi"]
+[ext_resource type="Material" uid="uid://d2rm70y344223" path="res://Ghosts/pacman_ghost/Material.008.tres" id="2_lhvua"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hbyas"]
+
+[node name="PinkGhost" type="Area3D" unique_id=228570423]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1027653571]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("SphereShape3D_hbyas")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CollisionShape3D" unique_id=58421152]
+material = ExtResource("1_tg8mi")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="CollisionShape3D" unique_id=754943186]
+transform = Transform3D(0.1957289, 0, 0, 0, 0.1957289, 0, 0, 0, 0.1957289, -0.18156517, 0.35354424, 0.23845053)
+material = ExtResource("2_lhvua")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="CollisionShape3D" unique_id=2010119284]
+transform = Transform3D(0.1957289, 0, 0, 0, 0.1957289, 0, 0, 0, 0.1957289, 0.14139268, 0.35816282, 0.26158255)
+material = ExtResource("2_lhvua")

@@ -1,6 +1,5 @@
 extends Node3D
-
-@onready var game = $"../../.."
+@onready var game = get_node("/root/Game")
 @onready var area_3d: Area3D = %Area3D
 @onready var player = %Player
 

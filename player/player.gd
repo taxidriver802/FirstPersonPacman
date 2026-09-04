@@ -1,8 +1,11 @@
 extends CharacterBody3D
 
+@onready var game = get_node("/root/Game")
 @onready var camera_3d: Camera3D = %Camera3D
 @onready var flashlight_beam = %FlashlightBeam
+@onready var damage_timer = %DamageTimer
 
+#region Constants
 const SPEED = 5.5
 const SPRINT_MULTI = 1.5
 const MAX_STAMINA = 100.0
@@ -20,9 +23,15 @@ const MAX_ATTENUATION = 5.0
 
 const ZOOM_SPEED = 30.0
 
+const MAX_HEALTH = 3
+#endregion
+
+#region Variablbles
 var points = 0
 var tired = false
 var sprint_stamina = MAX_STAMINA
+var health = MAX_HEALTH
+#endregion
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
@@ -104,3 +113,12 @@ func handle_flashlight_zoom(delta):
 		MIN_FLASHLIGHT_RANGE,
 		zoom_amount
 	)
+
+func handle_ghost_contact():
+	if damage_timer.is_stopped():
+		damage_timer.start()
+		health = max(health - 1, 0)
+		print(health)
+	if health <= 0:
+		game.health_label.text = "Lives: 0"
+		get_tree().paused = true

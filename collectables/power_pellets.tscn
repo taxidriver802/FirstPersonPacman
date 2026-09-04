@@ -4,9 +4,11 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ggh6h"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hbyas"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dplve"]
+metallic = 1.0
+roughness = 0.18
 
-[node name="PowerPellets" type="Node3D" unique_id=2019188297]
+[node name="PowerPellets" type="Node3D" unique_id=2019188297 groups=["pellets"]]
 script = ExtResource("1_fvpho")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=233578598]
@@ -18,4 +20,11 @@ shape = SubResource("BoxShape3D_ggh6h")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Area3D/CollisionShape3D" unique_id=1774344113]
 rings = 10
-material = SubResource("StandardMaterial3D_hbyas")
+material = SubResource("StandardMaterial3D_dplve")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Area3D" unique_id=947266655]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+light_energy = 4.944
+light_bake_mode = 1
+spot_range = 8.471
+spot_angle = 24.84

@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://de7m2f4jbmci"]
+
+[ext_resource type="Script" uid="uid://v4o31dhqitx2" path="res://Ghosts/pacman_ghost/blue_ghost.gd" id="1_h0sij"]
+[ext_resource type="Material" uid="uid://w10v4t565yk7" path="res://Ghosts/pacman_ghost/materials/Material.006.tres" id="2_8yego"]
+[ext_resource type="Material" uid="uid://d2rm70y344223" path="res://Ghosts/pacman_ghost/materials/Material.008.tres" id="3_m6lk5"]
+[ext_resource type="Script" uid="uid://pdagdu44anvy" path="res://Ghosts/pacman_ghost/area_3d.gd" id="4_m6lk5"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_hbyas"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hbyas"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_a5da5"]
+radius = 0.50699264
+
+[node name="BlueGhost" type="CharacterBody3D" unique_id=1637003557]
+script = ExtResource("1_h0sij")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=303496362]
+transform = Transform3D(0.929026, 0, 0, 0, 0.929026, 0, 0, 0, 0.929026, 0, 1.0017517, 0)
+mesh = SubResource("SphereMesh_hbyas")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2078000568]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1, 0)
+shape = SubResource("SphereShape3D_hbyas")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CollisionShape3D" unique_id=399331099]
+material = ExtResource("2_8yego")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="CollisionShape3D" unique_id=862618367]
+transform = Transform3D(0.1957289, 0, 0, 0, 0.1957289, 0, 0, 0, 0.1957289, -0.18156517, 0.35354424, 0.23845053)
+material = ExtResource("3_m6lk5")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="CollisionShape3D" unique_id=1099689994]
+transform = Transform3D(0.1957289, 0, 0, 0, 0.1957289, 0, 0, 0, 0.1957289, 0.14139268, 0.35816282, 0.26158255)
+material = ExtResource("3_m6lk5")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1778913697]
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1472729677]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 1, 0)
+script = ExtResource("4_m6lk5")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D" unique_id=21400211]
+shape = SubResource("SphereShape3D_a5da5")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1377775331]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+light_color = Color(0, 0, 1, 1)
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
